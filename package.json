@@ -1,0 +1,18 @@
+{
+  "name": "cbsecurity-passkeys",
+  "version": "0.0.0",
+  "description": "## Requirements - ColdBox 6+ - cbSecurity 3+",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@github/webauthn-json": "^2.1.1"
+  }
+}

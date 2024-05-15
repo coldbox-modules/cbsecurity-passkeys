@@ -1,0 +1,13 @@
+/testbox
+/tests/results
+/tests/resources/app/coldbox
+/node_modules
+/modules
+jmimemagic.log
+
+.vscode
+.env
+/lib
+/includes/webauthn-json.browser-global.js
+/build/lib
+/build/target
