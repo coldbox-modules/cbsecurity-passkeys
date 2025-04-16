@@ -14,6 +14,13 @@ component {
 			"relyingPartyName" : controller.getSetting( "appName" ),
 			"allowedOrigins" : []
 		};
+
+		interceptorSettings = {
+			"customInterceptionPoints" : [
+				"onPasskeyLogin",
+				"onPasskeyRegistration"
+			]
+		};
 	}
 
 	function afterAspectsLoad() {
@@ -37,6 +44,7 @@ component {
 			.build();
 
 		if ( settings.allowedOrigins.isEmpty() ) {
+			throw( "You are required to set at least one `allowedOrigin` to use cbsecurity-passkeys" );
 		}
 
 		var rpBuilder = createObject( "java", "com.yubico.webauthn.RelyingParty" )

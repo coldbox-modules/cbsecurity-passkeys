@@ -6,11 +6,11 @@ component secured {
 	property name="flash" inject="coldbox:flash";
 
 	function new( event, rc, prc ) {
-		var user = auth().user();
+		var user = cbSecure().getUser();
 		var name = variables.clientCredentialRepository.getUsernameForUser( user );
 		var displayName = variables.clientCredentialRepository.getDisplayNameForUser( user );
 		var idByteArray = createObject( "java", "com.yubico.webauthn.data.ByteArray" ).init(
-			variables.clientCredentialRepository.getUserHandleForUser( auth().user() )
+			variables.clientCredentialRepository.getUserHandleForUser( cbSecure().getUser() )
 		);
 
 		if ( log.canDebug() ) {
@@ -102,7 +102,7 @@ component secured {
 			}
 
 			variables.clientCredentialRepository.storeCredentialForUser(
-				user = auth().user(),
+				user = cbSecure().getUser(),
 				credentialId = result
 					.getKeyId()
 					.getId()

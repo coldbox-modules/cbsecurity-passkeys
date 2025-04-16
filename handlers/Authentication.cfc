@@ -91,12 +91,12 @@ component {
 			log.debug( "Passkey assertion successful for user [#username#]." );
 		}
 
-		var user = auth().getUserService().retrieveUserByUsername( username );
+		var user = cbSecure().getUserService().retrieveUserByUsername( username );
 
 		if ( log.canDebug() ) {
 			log.debug( "Logging in user [#username#] from a successful Passkey assertion." );
 		}
-		auth().login( user );
+		cbSecure().getAuthService().login( user );
 
 		if ( log.canDebug() ) {
 			log.debug( "Updating the credential after a successful Passkey assertion." );
@@ -108,6 +108,8 @@ component {
 			isBackedUp = result.isBackedUp(),
 			lastUsedTimestamp = now()
 		);
+
+		announce( "onPasskeyLogin", { "event" : event, "user" : user } );
 
 		event.renderData(
 			type = "json",

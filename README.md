@@ -18,7 +18,7 @@ this.javaSettings = {
 };
 ```
 
-3. Implement the `ICredentialRepository` interface. (See an example in `/resources/examples/Passkey.cfc`)
+3. Implement the `ICredentialRepository` interface. (See an example in `/resources/examples/quick/Passkey.cfc`)
 
 4. Configure your `credentialRepositoryMapping` in `config/ColdBox.cfc`
 ```js
@@ -27,4 +27,36 @@ moduleSettings = {
         "credentialRepositoryMapping": "Passkey"
     }
 }
+```
+
+5. Configure at least one (1) `allowedOrigins`
+```js
+moduleSettings = {
+    "cbsecurity-passkeys": {
+        "credentialRepositoryMapping": "Passkey",
+        "allowedOrigins": [ "example.com" ]
+    }
+}
+```
+
+Integrate using the `includes/passkeys.js` library:
+
+```html
+<script src="/modules/cbsecurity-passkeys/includes/passkeys.js"></script>
+<script type="module">
+    if ( await window.cbSecurity.passkeys.isSupported() ) {
+        await window.cbSecurity.passkeys.register(
+            // redirectLocation ("/")
+        );
+    }
+</script>
+<script type="module">
+    if ( await window.cbSecurity.passkeys.isSupported() ) {
+        await window.cbSecurity.passkeys.login(
+            // username (optional)
+            // redirectLocation ("/")
+            // additionalParams ({})
+        )
+    }
+</script>
 ```
