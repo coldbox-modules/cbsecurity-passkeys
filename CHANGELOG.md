@@ -1,3 +1,12 @@
+# v1.0.5
+## 17 Apr 2025 — 18:20:29 UTC
+
+### other
+
++ __\*:__ feat: Add autocomplete method for seamless login
+ ([b2d094d](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/b2d094d246339b21bd76abd72dd08ce24ca17bfe))
+
+
 # v1.0.4
 ## 17 Apr 2025 — 17:45:31 UTC
 
