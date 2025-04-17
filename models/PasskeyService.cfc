@@ -3,14 +3,14 @@ component singleton {
 	property name="clientCredentialRepository" inject="ClientCredentialRepository@cbsecurity-passkeys";
 	property name="log" inject="logbox:logger:{this}";
 
+	variables.PUBLIC_KEY_TYPE = createObject( "java", "com.yubico.webauthn.data.PublicKeyCredentialType" ).PUBLIC_KEY;
+
 	function getCredentialIdsForUsername( required string username ) {
 		if ( log.canDebug() ) {
 			log.debug( "Retrieving all credential ids for username [#arguments.username#]." );
 		}
 
-		var credentialIds = createObject( "java", "java.util.HashSet" ).init(
-			variables.clientCredentialRepository.getCredentialIdsForUsername( arguments.username )
-		);
+		var credentialIds = variables.clientCredentialRepository.getCredentialIdsForUsername( arguments.username );
 
 		if ( log.canDebug() ) {
 			log.debug(
@@ -19,7 +19,15 @@ component singleton {
 			);
 		}
 
-		return credentialIds;
+		return createObject( "java", "java.util.HashSet" ).init(
+			credentialIds.map( ( credentialId ) => {
+				return createObject( "java", "com.yubico.webauthn.data.PublicKeyCredentialDescriptor" )
+					.builder()
+					.id( toByteArray( credentialId ) )
+					.type( variables.PUBLIC_KEY_TYPE )
+					.build();
+			} )
+		);;
 	}
 
 	function getUserHandleForUsername( required string username ) {
@@ -137,6 +145,10 @@ component singleton {
 						.build();
 				} )
 		);
+	}
+
+	private any function toByteArray( required any value ) {
+		return createObject( "java", "com.yubico.webauthn.data.ByteArray" ).init( arguments.value );
 	}
 
 }
