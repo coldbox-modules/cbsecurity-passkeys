@@ -1,6 +1,6 @@
 {
     "name":"cbsecurity-passkeys",
-    "version":"1.0.2",
+    "version":"1.0.3",
     "author":"Eric Peterson <eric@elpete.com>",
     "location":"forgeboxStorage",
     "homepage":"https://github.com/coldbox-modules/cbsecurity-passkeys",
