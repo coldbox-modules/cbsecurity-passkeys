@@ -59,4 +59,10 @@ Integrate using the `includes/passkeys.js` library:
         )
     }
 </script>
+<script>
+    window.cbSecurity.passkeys.autocomplete(
+        // redirectLocation ("/")
+        // additionalParams ({})
+    );
+</script>
 ```
