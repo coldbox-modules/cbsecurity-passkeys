@@ -1,3 +1,12 @@
+# v1.0.6
+## 23 Apr 2025 — 16:28:51 UTC
+
+### other
+
++ __\*:__ fix: Fix serializing Java objects from yubico's webauthn library
+ ([8873aeb](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/8873aeb1eb6aeec892b6f8db3bcc872315168c99))
+
+
 # v1.0.5
 ## 17 Apr 2025 — 18:20:29 UTC
 
