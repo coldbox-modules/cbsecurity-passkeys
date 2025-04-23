@@ -139,7 +139,10 @@ component secured {
 			);
 		} catch ( "com.yubico.webauthn.exception.RegistrationFailedException" e ) {
 			if ( log.canError() ) {
-				log.error( e.getMessage(), { "exception" : e } );
+				log.error(
+					structKeyExists( e, "message" ) ? e.message : ( structKeyExists( e, "getMessage" ) ? e.getMessage() : toString( e ) ),
+					{ "exception" : e }
+				);
 			}
 			event.renderData(
 				type = "json",
@@ -151,7 +154,10 @@ component secured {
 			return;
 		} catch ( any e ) {
 			if ( log.canError() ) {
-				log.error( e.getMessage(), { "exception" : e } );
+				log.error(
+					structKeyExists( e, "message" ) ? e.message : ( structKeyExists( e, "getMessage" ) ? e.getMessage() : toString( e ) ),
+					{ "exception" : e }
+				);
 			}
 			rethrow;
 		}
