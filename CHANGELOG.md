@@ -1,3 +1,12 @@
+# v1.0.7
+## 23 Apr 2025 — 17:38:32 UTC
+
+### other
+
++ __\*:__ fix: Fix error handling in Registration
+ ([54953fa](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/54953fa0289d478558b5c39e92fd3e653df84ec8))
+
+
 # v1.0.6
 ## 23 Apr 2025 — 16:28:51 UTC
 
