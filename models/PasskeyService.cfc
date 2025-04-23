@@ -27,7 +27,7 @@ component singleton {
 					.type( variables.PUBLIC_KEY_TYPE )
 					.build();
 			} )
-		);;
+		);
 	}
 
 	function getUserHandleForUsername( required string username ) {

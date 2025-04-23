@@ -48,7 +48,7 @@ component secured {
 
 		flash.put(
 			name = "passkeyRegistrationRequest",
-			value = req,
+			value = req.toJson(),
 			saveNow = true
 		);
 
@@ -92,7 +92,11 @@ component secured {
 			var result = variables.relyingParty.finishRegistration(
 				createObject( "java", "com.yubico.webauthn.FinishRegistrationOptions" )
 					.builder()
-					.request( flash.get( "passkeyRegistrationRequest" ) )
+					.request(
+						createObject( "java", "com.yubico.webauthn.data.PublicKeyCredentialCreationOptions" ).fromJson(
+							flash.get( "passkeyRegistrationRequest" )
+						)
+					)
 					.response( pkc )
 					.build()
 			);

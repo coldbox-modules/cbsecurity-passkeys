@@ -29,7 +29,7 @@ component {
 
 		flash.put(
 			name = "passkeyAssertionRequest",
-			value = req,
+			value = req.toJson(),
 			saveNow = true
 		);
 
@@ -61,7 +61,11 @@ component {
 		var result = variables.relyingParty.finishAssertion(
 			createObject( "java", "com.yubico.webauthn.FinishAssertionOptions" )
 				.builder()
-				.request( flash.get( "passkeyAssertionRequest" ) )
+				.request(
+					createObject( "java", "com.yubico.webauthn.AssertionRequest" ).fromJson(
+						flash.get( "passkeyAssertionRequest" )
+					)
+				)
 				.response(
 					createObject( "java", "com.yubico.webauthn.data.PublicKeyCredential" ).parseAssertionResponseJson(
 						rc.publicKeyCredentialJson
