@@ -1,3 +1,12 @@
+# v1.0.8
+## 01 May 2025 — 16:32:10 UTC
+
+### other
+
++ __\*:__ fix: Allow returning null from lookup
+ ([e44d579](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/e44d579bc2a6a7b79396cc8a1a20f0fce746b2e8))
+
+
 # v1.0.7
 ## 23 Apr 2025 — 17:38:32 UTC
 
