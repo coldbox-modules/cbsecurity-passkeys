@@ -83,8 +83,9 @@ component extends="quick.models.BaseEntity" accessors="true" implements="cbsecur
     /**
      * `credentialId` and `userHandle` are both binary data
      * Returns a struct with a `publicKey` and a `signatureCount` property.
+	 * `null` if no credential is found.
      */
-	public struct function lookup( required any credentialId, required any userHandle ) {
+	public any function lookup( required any credentialId, required any userHandle ) {
 		var passkey = newEntity()
 			.where( "credentialId", credentialId )
 			.where( "userId", toString( userHandle ) )

@@ -140,8 +140,9 @@ component
 	/**
 	 * `credentialId` and `userHandle` are both binary data
 	 * Returns a struct with a `publicKey` and a `signatureCount` property.
+	 * `null` if no credential is found.
 	 */
-	public struct function lookup( required any credentialId, required any userHandle ) {
+	public any function lookup( required any credentialId, required any userHandle ) {
 		var passkey = this
 			.newCriteria()
 			.eq( "credentialId", arguments.credentialId )

@@ -9,9 +9,11 @@ interface displayname="ICredentialRepository" {
 	public string function getUsernameForUserHandle( required any userHandle );
 
 	/**
+	 * `credentialId` and `userHandle` are both binary data
 	 * Returns a struct with a `publicKey` and a `signatureCount` property.
+	 * `null` if no credential is found.
 	 */
-	public struct function lookup( required any credentialId, required any userHandle );
+	public any function lookup( required any credentialId, required any userHandle );
 	/**
 	 * Returns a struct with a `userHandle`, `publicKey` and a `signatureCount` property.
 	 */
