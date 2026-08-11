@@ -1,3 +1,12 @@
+# v1.0.9
+## 11 Aug 2026 — 20:33:54 UTC
+
+### other
+
++ __\*:__ docs: expand passkey integration guide
+ ([01c48f1](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/01c48f12b0d9eb4fc3ce99461cdddc072c92d56c))
+
+
 # v1.0.8
 ## 01 May 2025 — 16:32:10 UTC
 
