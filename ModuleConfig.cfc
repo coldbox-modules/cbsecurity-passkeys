@@ -12,7 +12,9 @@ component {
 			"credentialRepositoryMapping" : "",
 			"relyingPartyId" : CGI.SERVER_NAME,
 			"relyingPartyName" : controller.getSetting( "appName" ),
-			"allowedOrigins" : []
+			"allowedOrigins" : [],
+			"allowOriginSubdomains" : false,
+			"routeDomains" : []
 		};
 
 		interceptorSettings = {
@@ -53,10 +55,16 @@ component {
 			.credentialRepository( credentialRepository );
 
 		if ( !settings.allowedOrigins.isEmpty() ) {
-			rpBuilder.origins( createObject( "java", "java.util.HashSet" ).init( settings.allowedOrigins ) );
+			configureOriginValidation( rpBuilder );
 		}
 
 		binder.map( "RelyingParty@cbsecurity-passkeys" ).toValue( rpBuilder.build() );
+	}
+
+	private any function configureOriginValidation( required any rpBuilder ) {
+		return arguments.rpBuilder
+			.origins( createObject( "java", "java.util.HashSet" ).init( settings.allowedOrigins ) )
+			.allowOriginSubdomain( settings.allowOriginSubdomains );
 	}
 
 }
