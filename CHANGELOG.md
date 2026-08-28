@@ -1,3 +1,12 @@
+# v1.0.10
+## 28 Aug 2026 — 18:54:14 UTC
+
+### other
+
++ __\*:__ fix: update Yubico WebAuthn to 2.9.0
+ ([612d030](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/612d0301178b6ef0d45c1b7dc3d7ca0e727503a7))
+
+
 # v1.0.9
 ## 11 Aug 2026 — 20:33:54 UTC
 
