@@ -12,13 +12,23 @@ component {
 		}
 
 		for ( var domain in routeDomains ) {
-			group( { domain : domain }, () => {
-				get( "/registration/new", "Registration.new" );
-				post( "/registration", "Registration.create" );
+			route( "/registration/new" )
+				.withDomain( domain )
+				.withVerbs( "GET" )
+				.to( "Registration.new" );
+			route( "/registration" )
+				.withDomain( domain )
+				.withVerbs( "POST" )
+				.to( "Registration.create" );
 
-				get( "/authentication/new", "Authentication.new" );
-				post( "/authentication", "Authentication.create" );
-			} );
+			route( "/authentication/new" )
+				.withDomain( domain )
+				.withVerbs( "GET" )
+				.to( "Authentication.new" );
+			route( "/authentication" )
+				.withDomain( domain )
+				.withVerbs( "POST" )
+				.to( "Authentication.create" );
 		}
 
 		// Suppress ColdBox's automatic module handler/action convention route.
