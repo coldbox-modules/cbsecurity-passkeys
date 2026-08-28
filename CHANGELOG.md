@@ -1,3 +1,11 @@
+# v1.0.11
+## 28 Aug 2026 — 21:34:02 UTC
+
+### other
+
++ __\*:__ feat: support passkeys across subdomains (#1) ([547c934](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/547c9341055962e0403532b23ebf123fe3418952))
+
+
 # v1.0.10
 ## 28 Aug 2026 — 18:54:14 UTC
 
