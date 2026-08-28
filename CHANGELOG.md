@@ -1,3 +1,11 @@
+# v1.0.12
+## 28 Aug 2026 — 23:46:53 UTC
+
+### other
+
++ __\*:__ fix: accept parsed ceremony responses (#2) ([10391ec](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/10391ec10bc84140804970e1cd9c376845f90e02))
+
+
 # v1.0.11
 ## 28 Aug 2026 — 21:34:02 UTC
 
