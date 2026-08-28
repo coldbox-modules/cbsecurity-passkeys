@@ -48,6 +48,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          box task run build/downloadExternalDependencies
           box install
           box install ${{ matrix.coldbox }} --noSave
 

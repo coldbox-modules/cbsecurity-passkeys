@@ -140,7 +140,9 @@ component secured {
 		} catch ( "com.yubico.webauthn.exception.RegistrationFailedException" e ) {
 			if ( log.canError() ) {
 				log.error(
-					structKeyExists( e, "message" ) ? e.message : ( structKeyExists( e, "getMessage" ) ? e.getMessage() : toString( e ) ),
+					structKeyExists( e, "message" ) ? e.message : (
+						structKeyExists( e, "getMessage" ) ? e.getMessage() : toString( e )
+					),
 					{ "exception" : e }
 				);
 			}
@@ -155,7 +157,9 @@ component secured {
 		} catch ( any e ) {
 			if ( log.canError() ) {
 				log.error(
-					structKeyExists( e, "message" ) ? e.message : ( structKeyExists( e, "getMessage" ) ? e.getMessage() : toString( e ) ),
+					structKeyExists( e, "message" ) ? e.message : (
+						structKeyExists( e, "getMessage" ) ? e.getMessage() : toString( e )
+					),
 					{ "exception" : e }
 				);
 			}
