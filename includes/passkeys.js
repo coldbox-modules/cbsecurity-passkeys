@@ -259,6 +259,11 @@
   globalThis.webauthnJSON = webauthn_json_exports;
 })();
 //# sourceMappingURL=webauthn-json.browser-global.js.map
+async function parseJSONResponse(response) {
+	const json = await response.json();
+	return typeof json === "string" ? JSON.parse(json) : json;
+}
+
 const passkeys = {
 	supported: null,
 	async isSupported() {
@@ -281,8 +286,7 @@ const passkeys = {
 	async register(redirectLocation = "/") {
 		// Make the call that returns the credentialCreateJson above
 		const credentialCreateOptions = await fetch("/cbsecurity/passkeys/registration/new")
-			.then(resp => resp.json())
-			.then(json => JSON.parse(json));
+			.then(parseJSONResponse);
 
 		// Call WebAuthn ceremony using webauthn-json wrapper
 		const publicKeyCredential = await webauthnJSON.create(credentialCreateOptions);
@@ -311,8 +315,7 @@ const passkeys = {
 
 		// Make the call that returns the credentialGetJson above
 		const credentialGetOptions = await fetch("/cbsecurity/passkeys/authentication/new?" + new URLSearchParams(additionalParams))
-			.then(resp => resp.json())
-			.then(json => JSON.parse(json));
+			.then(parseJSONResponse);
 
 		// Call WebAuthn ceremony using webauthn-json wrapper
 		const publicKeyCredential = await webauthnJSON.get({
@@ -347,8 +350,7 @@ const passkeys = {
 			...additionalParams,
 			"username": username,
 		}))
-			.then(resp => resp.json())
-			.then(json => JSON.parse(json));
+			.then(parseJSONResponse);
 
 		// Call WebAuthn ceremony using webauthn-json wrapper
 		const publicKeyCredential = await webauthnJSON.get(credentialGetOptions);
