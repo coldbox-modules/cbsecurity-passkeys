@@ -87,7 +87,7 @@ jobs:
       - name: Setup CommandBox CLI
         uses: Ortus-Solutions/setup-commandbox@main
         with:
-          version: 5.7.0
+          version: 6.3.4
           install: commandbox-cfformat
 
       - name: Run CFFormat
