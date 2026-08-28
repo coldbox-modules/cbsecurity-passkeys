@@ -53,7 +53,10 @@ moduleSettings = {
         "relyingPartyName": "Example",
 
         // Use the complete origin, including the scheme and port when needed.
-        "allowedOrigins": [ "https://example.com" ]
+        "allowedOrigins": [ "https://example.com" ],
+
+        // Opt in when passkeys are shared with subdomains such as app.example.com.
+        "allowOriginSubdomains": true
     }
 };
 ```
@@ -66,9 +69,13 @@ All settings:
 | `relyingPartyId` | No | `CGI.SERVER_NAME` | WebAuthn relying-party ID. It must be a domain covered by the current origin. |
 | `relyingPartyName` | No | `appName` | Human-readable relying-party name. |
 | `allowedOrigins` | Yes | `[]` | One or more complete origins accepted by WebAuthn, such as `https://example.com`. |
+| `allowOriginSubdomains` | No | `false` | Allow subdomains of configured origins during WebAuthn origin validation. |
 
 The module will fail during startup when `credentialRepositoryMapping` is not
 configured or when `allowedOrigins` is empty.
+
+Keep `allowOriginSubdomains` disabled unless the same relying party intentionally
+serves passkey ceremonies from multiple trusted subdomains.
 
 Configure cbSecurity and its authentication provider as usual. After a
 successful assertion, the username returned by your repository is passed to
