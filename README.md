@@ -56,7 +56,10 @@ moduleSettings = {
         "allowedOrigins": [ "https://example.com" ],
 
         // Opt in when passkeys are shared with subdomains such as app.example.com.
-        "allowOriginSubdomains": true
+        "allowOriginSubdomains": true,
+
+        // Restrict the module endpoints to the hosts that serve passkey ceremonies.
+        "routeDomains": [ "example.com", ":tenant.example.com" ]
     }
 };
 ```
@@ -70,12 +73,23 @@ All settings:
 | `relyingPartyName` | No | `appName` | Human-readable relying-party name. |
 | `allowedOrigins` | Yes | `[]` | One or more complete origins accepted by WebAuthn, such as `https://example.com`. |
 | `allowOriginSubdomains` | No | `false` | Allow subdomains of configured origins during WebAuthn origin validation. |
+| `routeDomains` | No | `[]` | ColdBox domain patterns allowed to serve the module routes. An empty array preserves unrestricted routes. |
 
 The module will fail during startup when `credentialRepositoryMapping` is not
 configured or when `allowedOrigins` is empty.
 
 Keep `allowOriginSubdomains` disabled unless the same relying party intentionally
 serves passkey ceremonies from multiple trusted subdomains.
+
+Set `routeDomains` whenever the application router separates platform and tenant
+hosts. Each value uses ColdBox's domain-routing syntax, so a parameterized pattern
+such as `:tenant.example.com` can cover tenant subdomains. Requests on other hosts
+receive a router-level 404 instead of entering a passkey ceremony.
+
+Only the four documented registration and authentication ceremony routes are
+exposed. The module replaces ColdBox's automatic `/:handler/:action?` convention
+route with a 404 fallback so internal handler actions cannot bypass the route
+domain and HTTP verb constraints.
 
 Configure cbSecurity and its authentication provider as usual. After a
 successful assertion, the username returned by your repository is passed to

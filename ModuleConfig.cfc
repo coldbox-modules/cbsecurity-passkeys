@@ -13,7 +13,8 @@ component {
 			"relyingPartyId" : CGI.SERVER_NAME,
 			"relyingPartyName" : controller.getSetting( "appName" ),
 			"allowedOrigins" : [],
-			"allowOriginSubdomains" : false
+			"allowOriginSubdomains" : false,
+			"routeDomains" : []
 		};
 
 		interceptorSettings = {
