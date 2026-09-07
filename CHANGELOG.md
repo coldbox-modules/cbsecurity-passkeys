@@ -1,3 +1,12 @@
+# v1.0.13
+## 07 Sep 2026 — 03:07:21 UTC
+
+### other
+
++ __\*:__ ci: make bleeding-edge cron failures advisory
+ ([0aeaec3](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/0aeaec3155681de6069ce72638216258a2316a8a))
+
+
 # v1.0.12
 ## 28 Aug 2026 — 23:46:53 UTC
 
