@@ -30,8 +30,8 @@ component extends="testbox.system.BaseSpec" {
 			propertyName = "settings",
 			propertyScope = "variables",
 			mock = {
-				allowedOrigins   : [ "https://example.com" ],
-				allowOriginSubdomains   : arguments.allowOriginSubdomains
+				allowedOrigins    : [ "https://example.com" ],
+				allowOriginSubdomains    : arguments.allowOriginSubdomains
 			}
 		);
 		return makePublic( moduleConfig, "configureOriginValidation" );
