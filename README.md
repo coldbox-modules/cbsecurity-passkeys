@@ -454,7 +454,7 @@ The helper calls:
 
 On success it navigates to `redirectLocation`.
 
-### `autocomplete(redirectLocation = "/", additionalParams = {})`
+### `autocomplete(redirectLocation = "/", additionalParams = {}, signal?)`
 
 Starts a conditional, browser-assisted login. It is useful on a login page
 with an input that allows the browser to suggest a passkey:
@@ -469,6 +469,29 @@ loginButton.addEventListener("click", async () => {
 
 Unlike `login`, this method does not take a username. It sends
 `mediation: "conditional"` to the browser's WebAuthn API.
+
+The optional third argument is an `AbortSignal`. Existing calls without it retain
+their behavior. Pass a signal when the login form can disappear without a full
+page navigation, such as in a single-page application:
+
+```js
+const autofill = new AbortController();
+window.cbSecurity.passkeys.autocomplete("/account", {}, autofill.signal)
+    .catch(error => {
+        if (error.name !== "AbortError") {
+            console.error(error);
+        }
+    });
+
+// Run when the login form unmounts, or before starting another sign-in method.
+autofill.abort();
+```
+
+Cancellation reaches both HTTP requests and the WebAuthn ceremony. An aborted
+flow rejects with the signal's reason and does not proceed to the next stage or
+redirect. Cancellation cannot undo an authentication already processed by the
+server. Applications own the controller and should create a new one for each
+autofill flow.
 
 ## Additional parameters and remember-me integrations
 
