@@ -47,24 +47,33 @@ const passkeys = {
 			console.error("cbsecurity-passkeys - Registration failed:", registrationResponse);
 		}
 	},
-	async autocomplete(redirectLocation = "/", additionalParams = {}) {
-		if ( !(await passkeys.isSupported()) ) {
+	async autocomplete(redirectLocation = "/", additionalParams = {}, signal) {
+		signal?.throwIfAborted();
+		const supported = await passkeys.isSupported();
+		signal?.throwIfAborted();
+		if ( !supported ) {
 			return;
 		}
 
 		// Make the call that returns the credentialGetJson above
-		const credentialGetOptions = await fetch("/cbsecurity/passkeys/authentication/new?" + new URLSearchParams(additionalParams))
+		const credentialGetOptions = await fetch("/cbsecurity/passkeys/authentication/new?" + new URLSearchParams(additionalParams), signal ? { signal } : undefined)
 			.then(parseJSONResponse);
+
+		signal?.throwIfAborted();
 
 		// Call WebAuthn ceremony using webauthn-json wrapper
 		const publicKeyCredential = await webauthnJSON.get({
 			mediation: "conditional",
-			...credentialGetOptions
+			...credentialGetOptions,
+			...(signal ? { signal } : {})
 		});
+
+		signal?.throwIfAborted();
 
 		// Return encoded PublicKeyCredential to server
 		const authenticationResponse = await fetch("/cbsecurity/passkeys/authentication", {
 			method: "POST",
+			...(signal ? { signal } : {}),
 			headers: {
 				"Content-Type": "application/json"
 			},
@@ -73,6 +82,8 @@ const passkeys = {
 				"publicKeyCredentialJson": JSON.stringify(publicKeyCredential)
 			})
 		});
+
+		signal?.throwIfAborted();
 
 		if (authenticationResponse.ok) {
 			window.location = redirectLocation;
