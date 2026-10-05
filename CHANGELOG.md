@@ -1,3 +1,11 @@
+# v1.0.14
+## 05 Oct 2026 — 04:24:35 UTC
+
+### other
+
++ __\*:__ fix: Support cancellation of conditional passkey autofill ([fdde6b2](https://github.com/coldbox-modules/cbsecurity-passkeys/commit/fdde6b236876e2016353f5fbc24a9349270fac9f))
+
+
 # v1.0.13
 ## 07 Sep 2026 — 03:07:21 UTC
 
